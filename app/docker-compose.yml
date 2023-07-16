@@ -1,9 +1,9 @@
 version: '3'
 services:
-        core_api:
-                build: .
-                container_name: "core-api-container"
-                ports:
-                    - "8000:15400"
-                volumes:
-                      - ./app/:/app
+    core_api:
+        build: .
+        container_name: "chile-container"
+        ports:
+            - "8000:15400"
+        volumes:
+            - .:/app
