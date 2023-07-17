@@ -1,1 +1,2 @@
 scikit-learn==1.2.1
+pandas>=0.18.1

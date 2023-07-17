@@ -1,7 +1,9 @@
-
+#import pandas as pd
 import pickle
 import logging
+import json
 import pandas as pd
+import numpy as np
 from pathlib import Path
 test_path= "test.csv"
 
@@ -20,12 +22,15 @@ with open(f"{Base_DIR}/trained_pipeline-{__version__}.pkl","rb") as f:
 def predict_pipepline_from_path(path):
     df_file=''
     try:
-        df_file = pd.read_csv(path, index_col=False)
+        apicsv = pd.read_csv("api.csv",sep=",")
+        model.predict(apicsv.loc[[0]])
     except FileNotFoundError:
         logging.warning('File not found.')
     
     model.predict(df_file)
 
-def getPredictionFromTestByIndex(index):
-    test = pd.read_csv(test_path)
-    return model.predict(test.loc[[index]])
+def getPredictionFromTestByIndex():
+    apicsv = pd.read_csv(f"{Base_DIR}/api.csv", sep=",")
+    #with open("./api.csv", "r") as csvfile:
+    #    all_lines = csvfile.readlines()
+    return model.predict(apicsv[apicsv.columns]).tolist()
