@@ -35,12 +35,16 @@ By incorporating these practices, you can enhance the code for developing the pr
 depois de criar o dockerfile executar o comando  docker build -t prediction-chile .
 com o ponto, isso cria a imagem
 
-2 = docker run -p 80:80  prediction-chile 
+2 = docker container run -p 80:80  prediction-chile 
 
 3 - ir no navegador ou digitar http://localhost/ ou http://0.0.0.0:80
 
 4  - http://localhost/docs documentation
 
-5- se quiser atualizar o 
+5- se quiser criar o container a partir da imagem en
+ docker container run nomedocontainer
+ docker container ls -a para listar todos os containers
+ docker container ls somente os que estao rodando
+docker container rm id ou nomedocontainer para remover o container
 
 6 - No mercado comercial de software logs sao importantes, para isso 
