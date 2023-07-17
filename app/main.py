@@ -121,6 +121,7 @@ def home():
 @app.get("/predictionsPassingTheCsvFilename/{name}")
 def predictionsByCsv(name=str):
     """A function that returns price predictions to a csv file stored in the learningFiles folder."""
+    """Please note that the .csv at the end of the file name is not required """
     try:
         return getPredictionFromTestByIndex(name)
     except ValueError as e:
@@ -131,8 +132,6 @@ def predictionsByCsv(name=str):
 @app.exception_handler(500)
 async def internal_exception_handler(request: Request, exc: Exception):
   return JSONResponse(status_code=500, content=jsonable_encoder({"code": 500, "msg": "Unexpected value"}))
-
-
 
 
 
