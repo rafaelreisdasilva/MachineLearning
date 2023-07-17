@@ -1,12 +1,13 @@
 ## Improvement Points
 
-- The "Property-Friends-basic-model" file could have a more intuitive name to facilitate typing and improve clarity.
+- The "Property-Friends-basic-model" file could have a more intuitive name to facilitate typing and improve reproducibility.
 
-- The initial model provided was functioning perfectly, as mentioned in the Challenge.md file:
+- The initial model provided was functioning perfectly and as mentioned in the Challenge.md file:
 
   "After some experimentation, the Client is happy with the current results and wants to bring the model into a deployable solution."
 
   Thus, it would have been sufficient to leave the model with the initial results as shown in the image /images/initial_values.png.
+  Despite the rmse not being good.
 
 ## Exploratory Analysis
 
@@ -24,17 +25,17 @@ In the initial dataset, the columns consisted of:
 - longitude
 - price
 
-I conducted an initial exploration to identify any missing values in the dataset, and fortunately, no missing values were found.
+I conducted an initial exploration to identify any `missing values` in the dataset, and fortunately, no missing values were found.
 
 To gain a better understanding of the dataset's format, I utilized functions such as `info()` and `describe()`. Additionally, I examined the shape and columns attributes.
 
-For univariate analysis, I created histograms to visualize the distributions of the variables.
+For `univariate analysis`, I created histograms to visualize the distributions of the variables.
 
-Moving on to bivariate analysis, I plotted categorical variables and generated scatter plots to explore the relationships between price and net_area, as well as price and net_usable_area. I was particularly interested in understanding the area-to-price ratio.
+Moving on to `bivariate analysis`, I plotted categorical variables and generated scatter plots to explore the relationships between price and net_area, as well as price and net_usable_area. I was particularly interested in understanding the area-to-price ratio.
 
 During this analysis, I discovered that there were only two types of properties: "department" or "house," and there were only five sectors: "vitacura," "la reina," "las condes," "lo barnechea," and "providencia." Further research revealed that these sectors are referred to as "communes" and exclusively represent the metropolitan region of Santiago, providing valuable geolocation insights.
 
-For multivariate analysis, I created a correlation matrix to examine the relationships between variables. The initial correlation matrix revealed a strong correlation between the number of rooms and the number of bathrooms, as well as between latitude and longitude.
+For `multivariate analysis`, I created a correlation matrix to examine the relationships between variables. The initial correlation matrix revealed a strong correlation between the number of rooms and the number of bathrooms, as well as between latitude and longitude.
 
 ## Assumptions
 
@@ -104,7 +105,7 @@ To handle errors, we use `try` blocks and specific methods such as `exception_ha
 
 ## API Points
 
-We utilize FASTAPI, and the documentation can be found at http://localhost/docs.
+We utilized FASTAPI, and the documentation can be found at http://localhost/docs.
 
 ## Results
 
