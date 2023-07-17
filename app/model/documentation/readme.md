@@ -9,6 +9,26 @@
   Thus, it would have been sufficient to leave the model with the initial results as shown in the image /images/initial_values.png.
   Despite the rmse not being good.
 
+  Although we have modularized the folders, it is possible to adopt the MVC (Model-View-Controller) or other design pattern techniques. This would further enhance the organization and maintainability of the codebase.
+
+To improve maintainability, it would be beneficial to represent file paths using constants instead of hard-coding them. This approach provides flexibility and makes it easier to modify or update file paths in the future.
+
+Considering the correlation matrix, it becomes apparent that some variables have little correlation with the price. In such cases, feature scaling techniques could have been employed to normalize the data and potentially improve the model's performance.
+
+I noticed that the statement:
+
+```python
+from sklearn.model_selection import GridSearchCV
+```
+
+is present in the model file. I believe this is used for hyperparameter tuning, which is an essential step in optimizing the model's performance.
+
+Furthermore, implementing cross-validation strategies during model training would yield more robust performance estimates. This would involve dividing the dataset into multiple folds and training the model on different combinations of these folds to obtain a more accurate assessment of its generalization capability.
+
+Another improvement would involve model selection. It would be interesting to compare the evaluation metrics of the GradientBoostingRegressor with those obtained from GridSearchCV. This would help determine which approach generates better results and ultimately select the most suitable model.
+
+Lastly, it would be beneficial to develop the backend functionality for the route form of "/". This would allow the client to send each parameter individually instead of in a batch, and receive the corresponding result directly on the screen.
+
 ## Exploratory Analysis
 
 Initially, my goal was to understand the training dataset.
@@ -58,7 +78,7 @@ Bain [Folder]
       └─ Property-Friends-basic-model.ipynb (Template provided)
    Dockerfile (Dockerfile containing the Docker settings; we chose to use the default image)
    log_modelApiEndPoint.log (File containing logs for the API endpoint)
-   log.log (File containing general logs)
+   log_general.log (File containing general logs)
    requirements.txt (File containing the Docker requirements to run the files)
 ```
 

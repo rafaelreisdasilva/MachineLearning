@@ -14,7 +14,7 @@ from fastapi import HTTPException, status, Security, FastAPI
 from fastapi.security import APIKeyHeader, APIKeyQuery
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-
+from imp import reload 
 
 API_KEYS = [
     "9d207bf0-10f5-4d8f-a479-22ff5aeff8d1",
@@ -57,13 +57,14 @@ def get_api_key(
 app = FastAPI()
 
 
- 
+
 #creating the logs
-logging.basicConfig(level=logging.INFO, filename="log.log", filemode="w", format="%(asctimea)s - %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.DEBUG, filename="log_general.log", filemode="a", format="%(asctime)s - %(levelname)s - %(message)s")
 
 #home route
 @app.get("/")
 def home():
+    logging.info("main page access")
     html_content = """
     <html>
         <head>
@@ -80,34 +81,96 @@ def home():
             <p>To enhance the model's accuracy, categorical variables were included in the learning process. As a result, the file includes the following fields:</p>
 
             <ul>
-                <li>net_usable_area</li>
-                <li>net_area</li>
-                <li>n_rooms</li>
-                <li>n_bathroom</li>
-                <li>latitude</li>
-                <li>longitude</li>
-                <li>price</li>
-                <li>la reina</li>
-                <li>las condes</li>
-                <li>lo barnechea</li>
-                <li>nunoa</li>
-                <li>providence</li>
-                <li>vitacura</li>
-                <li>house</li>
-                <li>department</li>
-                <li>bathroom_ratio</li>
-                <li>household_rooms</li>
+                <li>net_usable_area (int)</li>
+                <li>net_area (int) </li>
+                <li>n_rooms (int)</li>
+                <li>n_bathroom (int)</li>
+                <li>latitude (float)</li>
+                <li>longitude(float)</li>
+                <li>price (int)</li>
+                <li>la reina(bool)</li>
+                <li>las condes(bool)</li>
+                <li>lo barnechea(bool)</li>
+                <li>nunoa(bool)</li>
+                <li>providence(bool)</li>
+                <li>vitacura(bool)</li>
+                <li>house(bool)</li>
+                <li>department(int)</li>
+                <li>bathroom_ratio(int)</li>
+                <li>household_rooms(int)</li>
             </ul>
 
             <p>To handle the initial categories, #n-1 dummy variables were utilized, effectively avoiding arbitrary weighting errors.</p>
             <br>
-            <table style="width:100%">
-               <tr><td><b>URL</b></td><td><b>Description</b></td><td><b>How to use</b></td><td><b>Restrictions</b></td></tr>
-                
-                <tr><td><b>/predictionsPassingTheCsvFilename/filename</b></td><td>The purpose of this method is to return the estimated price from a csv file</td>
-                <td>You must upload the file in the learningFiles folder and pass the file name as a parameter, without the format.</td></tr>
+           <table style="width:100%">
+            <tr>
+                <th>URL</th>
+                <th>Description</th>
+                <th>How to Use</th>
+                <th>Restrictions</th>
+            </tr>
+            <tr>
+                <td><code>/predictionsPassingTheCsvFilename/filename</code></td>
+                <td>This method retrieves the estimated price from a CSV file.</td>
+                <td>To use this method, you need to upload the file to the "learningFiles" folder and pass the file name as a parameter without the file format extension.</td>
+                <td>None</td>
+            </tr>
+            </table>
 
+        <br>
+        <form action="/" method="post">
+        <label for="net_usable_area">net_usable_area:</label>
+        <input type="number" name="net_usable_area" id="net_usable_area" required><br>
 
+        <label for="net_area">net_area:</label>
+        <input type="number" name="net_area" id="net_area" required><br>
+
+        <label for="n_rooms">n_rooms:</label>
+        <input type="number" name="n_rooms" id="n_rooms" required><br>
+
+        <label for="n_bathroom">n_bathroom:</label>
+        <input type="number" name="n_bathroom" id="n_bathroom" required><br>
+
+        <label for="latitude">latitude:</label>
+        <input type="number" step="any" name="latitude" id="latitude" required><br>
+
+        <label for="longitude">longitude:</label>
+        <input type="number" step="any" name="longitude" id="longitude" required><br>
+
+        <label for="price">price:</label>
+        <input type="number" name="price" id="price" required><br>
+
+        <label for="la_reina">la reina:</label>
+        <input type="checkbox" name="la_reina" id="la_reina"><br>
+
+        <label for="las_condes">las condes:</label>
+        <input type="checkbox" name="las_condes" id="las_condes"><br>
+
+        <label for="lo_barnechea">lo barnechea:</label>
+        <input type="checkbox" name="lo_barnechea" id="lo_barnechea"><br>
+
+        <label for="nunoa">nunoa:</label>
+        <input type="checkbox" name="nunoa" id="nunoa"><br>
+
+        <label for="providence">providence:</label>
+        <input type="checkbox" name="providence" id="providence"><br>
+
+        <label for="vitacura">vitacura:</label>
+        <input type="checkbox" name="vitacura" id="vitacura"><br>
+
+        <label for="house">house:</label>
+        <input type="checkbox" name="house" id="house"><br>
+
+        <label for="department">department:</label>
+        <input type="checkbox" name="department" id="department"><br>
+
+        <label for="bathroom_ratio">bathroom_ratio:</label>
+        <input type="number" name="bathroom_ratio" id="bathroom_ratio" required><br>
+
+        <label for="household_rooms">household_rooms:</label>
+        <input type="number" name="household_rooms" id="household_rooms" required><br>
+
+        <input type="submit" value="Enviar">
             </table>
         </body>
     </html>
@@ -120,6 +183,7 @@ def home():
 
 @app.get("/predictionsPassingTheCsvFilename/{name}")
 def predictionsByCsv(name=str):
+    logging.info("user wanted to predict data from file "+name+".csv")
     """A function that returns price predictions to a csv file stored in the learningFiles folder."""
     """Please note that the .csv at the end of the file name is not required """
     try:
@@ -131,12 +195,22 @@ def predictionsByCsv(name=str):
 
 @app.exception_handler(500)
 async def internal_exception_handler(request: Request, exc: Exception):
+  logging.info("Error 500")
   return JSONResponse(status_code=500, content=jsonable_encoder({"code": 500, "msg": "Unexpected value"}))
 
+@app.exception_handler(400)
+async def internal_exception_handler(request: Request, exc: Exception):
+  logging.info("Error 400")
+  return JSONResponse(status_code=400, content=jsonable_encoder({"code": 400, "msg": "Unexpected value"}))
 
+@app.exception_handler(422)
+async def internal_exception_handler(request: Request, exc: Exception):
+  logging.info("Error 422")
+  return JSONResponse(status_code=422, content=jsonable_encoder({"code": 422, "msg": "Validation Error"}))
 
 #To test the API key authentication, you can use tools like cURL or Postman.
 @app.get("/private")
 def private(api_key: str = Security(get_api_key)):
+    logging.info("Access to a private endpoint")
     """A private endpoint that requires a valid API key to be provided."""
     return f"Private Endpoint. API Key: {api_key}" 
