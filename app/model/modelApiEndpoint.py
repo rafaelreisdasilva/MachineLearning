@@ -2,8 +2,8 @@
 import pickle
 import logging
 import re
-from pathlib import Path
 import pandas as pd
+from pathlib import Path
 test_path= "test.csv"
 
 __version__ = "0.1.0" #current version of my model
@@ -29,4 +29,4 @@ def predict_pipepline_from_path(path):
 
 def getPredictionFromTestByIndex(index):
     test = pd.read_csv(test_path)
-    return model.predict(test.loc[[0]])
+    return model.predict(test.loc[[index]])

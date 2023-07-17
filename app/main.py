@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel #data validation
 import logging
-from app.model.modelApiEndpoint import *
+from app.model.modelApiEndpoint import getPredictionFromTestByIndex
 from app.model.modelApiEndpoint import __version__ as model_version
 from pathlib import Path
 
@@ -28,9 +28,6 @@ def home():
 
 
 #class PredictionPath(BaseModel)
-
-
-
 @app.get("/predictFromTestByIndex/{id_line}")
 def predictionFromTestByIndex(id_line=int):
     return getPredictionFromTestByIndex(id_line)
