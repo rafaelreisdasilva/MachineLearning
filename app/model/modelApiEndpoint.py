@@ -5,12 +5,14 @@ import json
 import pandas as pd
 import numpy as np
 from pathlib import Path
+from imp import reload 
 test_path= "test.csv"
 
 __version__ = "0.1.0" #current version of my model
 
+reload(logging)
 #creating the logs
-logging.basicConfig(level=logging.INFO, filename="log_modelApiEndPoint.log", filemode="w", format="%(asctimea)s - %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO, filename="log_modelApiEndPoint.log", filemode="a", format="%(asctime)s - %(levelname)s - %(message)s")
 
 Base_DIR = Path(__file__).resolve(strict=True).parent
 
