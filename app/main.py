@@ -1,8 +1,11 @@
 #!pip install fastapi
 #!pip install uvicorn
+
+import logging
+
+
 from fastapi import FastAPI
 from pydantic import BaseModel #data validation
-import logging
 from app.model.modelApiEndpoint import getPredictionFromTestByIndex
 from app.model.modelApiEndpoint import __version__ as model_version
 from pathlib import Path

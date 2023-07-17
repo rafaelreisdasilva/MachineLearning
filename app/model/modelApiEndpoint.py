@@ -1,7 +1,6 @@
 
 import pickle
 import logging
-import re
 import pandas as pd
 from pathlib import Path
 test_path= "test.csv"
