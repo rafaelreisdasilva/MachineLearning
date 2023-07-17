@@ -30,3 +30,17 @@ To improve the code for developing a model to estimate property valuations for a
 9. **Logging and documentation**: Implement logging to capture important information during model training and evaluation. Additionally, include documentation in the code to provide explanations and comments for better code understanding.
 
 By incorporating these practices, you can enhance the code for developing the property valuation model in terms of code organization, data handling, feature engineering, model selection, and documentation.
+
+
+depois de criar o dockerfile executar o comando  docker build -t prediction-chile .
+com o ponto, isso cria a imagem
+
+2 = docker run -p 80:80  prediction-chile 
+
+3 - ir no navegador ou digitar http://localhost/ ou http://0.0.0.0:80
+
+4  - http://localhost/docs documentation
+
+5- se quiser atualizar o 
+
+6 - No mercado comercial de software logs sao importantes, para isso 
