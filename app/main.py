@@ -24,15 +24,25 @@ logging.basicConfig(level=logging.INFO, filename="log.log", filemode="w", format
 #home route
 @app.get("/")
 def home():
+    html_content = """
+    <html>
+        <head>
+            <title>Some HTML in here</title>
+        </head>
+        <body>
+            <h1>Hi</h1>
+        </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content, status_code=200)
     #try:
-    return "<table></table>"
     #except ZeroDivisionError as e:
         #logging.error("ZeroDivisionError",exc_info=True)
         #logging.exception("Error")
 
 
 #class PredictionPath(BaseModel)
-@app.get("/predictFromTestByIndex")
-def predictionFromTestByIndex():
+@app.get("/predictionsPassingTheFilename")
+def predictionsPassingTheFilename():
     return getPredictionFromTestByIndex()
     #return HTMLResponse(content=getPredictionFromTestByIndex(id_line), status_code=200)

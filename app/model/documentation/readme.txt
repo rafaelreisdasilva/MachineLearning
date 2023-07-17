@@ -9,6 +9,8 @@
 3. A README file documenting the project, including instructions for running the pipeline and API, dependencies, and any assumptions or suggestions for improvement.
 
 
+Pontos de melhoria:
+
 To improve the code for developing a model to estimate property valuations for an important real estate client in Chile, you can consider the following practices:
 
 1. **Modularize the code**: Split the code into separate functions or classes to improve code organization, readability, and reusability. For example, you can create functions for data loading, preprocessing, model training, and evaluation.
@@ -32,6 +34,34 @@ To improve the code for developing a model to estimate property valuations for a
 By incorporating these practices, you can enhance the code for developing the property valuation model in terms of code organization, data handling, feature engineering, model selection, and documentation.
 
 
+Hipóteses:
+
+Análise Exploratória:
+
+Estrutura de arquivos:
+
+Bain 
+    app 
+        model
+            instructions
+        Dataset-analysis-train.ipynb
+        modelApiEndPoint.py
+        Property-Friends-basic-model.ipynb
+    dockerfile
+    log_modelApiEndPoint.log
+    log.log
+    requirements.txt
+
+
+
+-Arquivos de logging
+
+Como Executar o código?
+
+Tratamento de Erros:
+
+Pontos da Api
+
 depois de criar o dockerfile executar o comando  docker build -t prediction-chile .
 com o ponto, isso cria a imagem
 
@@ -48,3 +78,6 @@ com o ponto, isso cria a imagem
 docker container rm id ou nomedocontainer para remover o container
 
 6 - No mercado comercial de software logs sao importantes, para isso 
+
+
+Resultados
