@@ -31,6 +31,4 @@ def predict_pipepline_from_path(path):
 
 def getPredictionFromTestByIndex():
     apicsv = pd.read_csv(f"{Base_DIR}/api.csv", sep=",")
-    #with open("./api.csv", "r") as csvfile:
-    #    all_lines = csvfile.readlines()
     return model.predict(apicsv[apicsv.columns]).tolist()
