@@ -29,6 +29,8 @@ Another improvement would involve model selection. It would be interesting to co
 
 Lastly, it would be beneficial to develop the backend functionality for the route form of "/". This would allow the client to send each parameter individually instead of in a batch, and receive the corresponding result directly on the screen.
 
+However, the function with the request made by FastAPI works this functionality.
+
 ## Exploratory Analysis
 
 Initially, my goal was to understand the training dataset.
