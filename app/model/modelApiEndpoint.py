@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from imp import reload 
-test_path= "test.csv"
+
 
 __version__ = "0.1.0" #current version of my model
 

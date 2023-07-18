@@ -4,7 +4,7 @@
 import logging
 import pandas
 import json
-from fastapi import FastAPI,Request
+from fastapi import FastAPI,Request,  Form
 from pydantic import BaseModel #data validation
 from .model.modelApiEndpoint import getPredictionFromTestByIndex
 from .model.modelApiEndpoint import __version__ as model_version
@@ -15,6 +15,8 @@ from fastapi.security import APIKeyHeader, APIKeyQuery
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from imp import reload 
+from fastapi.templating import Jinja2Templates
+import requests
 
 API_KEYS = [
     "9d207bf0-10f5-4d8f-a479-22ff5aeff8d1",
@@ -60,9 +62,9 @@ app = FastAPI()
 # Remove all handlers associated with the root logger object.
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
-    
+
 #creating the logs
-logging.basicConfig(level=logging.DEBUG, filename="log_general.log", filemode="a", format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.DEBUG, filename="log_general.log", filemode="w", format="%(asctime)s - %(levelname)s - %(message)s")
 
 #home route
 @app.get("/")
@@ -217,3 +219,62 @@ def private(api_key: str = Security(get_api_key)):
     logging.info("Access to a private endpoint")
     """A private endpoint that requires a valid API key to be provided."""
     return f"Private Endpoint. API Key: {api_key}" 
+
+
+@app.post("/")
+async def process_form(
+    net_usable_area: int = Form(...),
+    net_area: int = Form(...),
+    n_rooms: int = Form(...),
+    n_bathroom: int = Form(...),
+    latitude: float = Form(...),
+    longitude: float = Form(...),
+    price: int = Form(...),
+    la_reina: bool = Form(...),
+    las_condes: bool = Form(...),
+    lo_barnechea: bool = Form(...),
+    nunoa: bool = Form(...),
+    providence: bool = Form(...),
+    vitacura: bool = Form(...),
+    house: bool = Form(...),
+    department: bool = Form(...),
+    bathroom_ratio: int = Form(...),
+    household_rooms: int = Form(...)
+):
+    return {"message": "Form submitted successfully!"}
+
+'''
+# URL do seu servidor FastAPI
+url = "http://localhost:80"
+
+# Parâmetros do formulário
+params = {
+    "net_usable_area": 100,
+    "net_area": 120,
+    "n_rooms": 3,
+    "n_bathroom": 2,
+    "latitude": 123.456,
+    "longitude": -45.678,
+    "price": 200000,
+    "la_reina": True,
+    "las_condes": False,
+    "lo_barnechea": True,
+    "nunoa": False,
+    "providence": True,
+    "vitacura": False,
+    "house": True,
+    "department": False,
+    "bathroom_ratio": 2,
+    "household_rooms": 4
+}
+
+# Enviar a requisição POST
+response = requests.post(url, data=params)
+
+# Verificar a resposta
+if response.status_code == 200:
+    print("Formulário enviado com sucesso!")
+else:
+    print("Ocorreu um erro ao enviar o formulário.")
+
+'''
