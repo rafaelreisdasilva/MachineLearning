@@ -57,7 +57,10 @@ def get_api_key(
 app = FastAPI()
 
 
-
+# Remove all handlers associated with the root logger object.
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+    
 #creating the logs
 logging.basicConfig(level=logging.DEBUG, filename="log_general.log", filemode="a", format="%(asctime)s - %(levelname)s - %(message)s")
 
