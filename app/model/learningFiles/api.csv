@@ -1,4 +1,4 @@
-net_usable_area,net_area,n_rooms,n_bathroom,latitude,longitude,price,la reina,las condes,lo barnechea,nunoa,providencia,vitacura,casa,departamento,bathroom_ratio,household_rooms
+net_usable_area,net_area,n_rooms,n_bathroom,latitude,longitude,price,la_reina,las_condes,lo_barnechea,nunoa,providencia,vitacura,casa,departamento,bathroom_ratio,household_rooms
 140.0,170.0,4.0,4.0,-33.40123,-70.58055999999998,11900,0,0,0,0,0,1,0,1,1,4
 140.0,170.0,4.0,4.0,-33.40123,-70.58055999999998,11900,0,0,0,0,0,1,0,1,1,4
 140.0,170.0,4.0,4.0,-33.40123,-70.58055999999998,11900,0,0,0,0,0,1,0,1,1,4

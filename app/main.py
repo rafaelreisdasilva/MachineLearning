@@ -2,11 +2,11 @@
 #!pip install uvicorn
 
 import logging
-import pandas
+import pandas as pd
 import json
 from fastapi import FastAPI,Request,  Form
 from pydantic import BaseModel #data validation
-from .model.modelApiEndpoint import getPredictionFromTestByIndex
+from .model.modelApiEndpoint import getPredictionFromTestByIndex, getPredictionFromForm
 from .model.modelApiEndpoint import __version__ as model_version
 from pathlib import Path
 from fastapi.responses import HTMLResponse
@@ -146,28 +146,28 @@ def home():
         <input type="number" name="price" id="price" required><br>
 
         <label for="la_reina">la reina:</label>
-        <input type="checkbox" name="la_reina" id="la_reina"><br>
+        <input type="checkbox" name="la_reina" id="la_reina"  value="true"><br>
 
         <label for="las_condes">las condes:</label>
-        <input type="checkbox" name="las_condes" id="las_condes"><br>
+        <input type="checkbox" name="las_condes" id="las_condes"  value="true"><br>
 
         <label for="lo_barnechea">lo barnechea:</label>
-        <input type="checkbox" name="lo_barnechea" id="lo_barnechea"><br>
+        <input type="checkbox" name="lo_barnechea" id="lo_barnechea"  value="true"><br>
 
         <label for="nunoa">nunoa:</label>
-        <input type="checkbox" name="nunoa" id="nunoa"><br>
+        <input type="checkbox" name="nunoa" id="nunoa"  value="true"><br>
 
         <label for="providence">providence:</label>
-        <input type="checkbox" name="providence" id="providence"><br>
+        <input type="checkbox" name="providence" id="providence"  value="true"><br>
 
         <label for="vitacura">vitacura:</label>
-        <input type="checkbox" name="vitacura" id="vitacura"><br>
+        <input type="checkbox" name="vitacura" id="vitacura"  value="true"><br>
 
         <label for="house">house:</label>
-        <input type="checkbox" name="house" id="house"><br>
+        <input type="checkbox" name="house" id="house"  value="true"><br>
 
         <label for="department">department:</label>
-        <input type="checkbox" name="department" id="department"><br>
+        <input type="checkbox" name="department" id="department"  value="true"><br>
 
         <label for="bathroom_ratio">bathroom_ratio:</label>
         <input type="number" name="bathroom_ratio" id="bathroom_ratio" required><br>
@@ -241,7 +241,28 @@ async def process_form(
     bathroom_ratio: int = Form(...),
     household_rooms: int = Form(...)
 ):
-    return {"message": "Form submitted successfully!"}
+    data = {
+        "net_usable_area": net_usable_area,
+        "net_area": net_area,
+        "n_rooms": n_rooms,
+        "n_bathroom": n_bathroom,
+        "latitude": latitude,
+        "longitude": longitude,
+        "price": price,
+        "la_reina": la_reina,
+        "las_condes": las_condes,
+        "lo_barnechea": lo_barnechea,
+        "nunoa": nunoa,
+        "providencia": providence,
+        "vitacura": vitacura,
+        "casa": house,
+        "departamento": department,
+        "bathroom_ratio": bathroom_ratio,
+        "household_rooms": household_rooms
+    }
+    df = pd.DataFrame([data])
+    prediction = getPredictionFromForm(df)
+    return prediction.tolist()
 
 '''
 # URL do seu servidor FastAPI
