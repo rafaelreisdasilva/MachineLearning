@@ -78,6 +78,7 @@ Bain [Folder]
       └─ Exploratory_Analysis.ipynb (Jupyter notebook for performing exploratory analysis)
       └─ modelApiEndPoint.py (Python file that serves as the endpoint for API requests)
       └─ Property-Friends-basic-model.ipynb (Template provided)
+   └─ main.py [FastApi]
    Dockerfile (Dockerfile containing the Docker settings; we chose to use the default image)
    log_modelApiEndPoint.log (File containing logs for the API endpoint)
    log_general.log (File containing general logs)
