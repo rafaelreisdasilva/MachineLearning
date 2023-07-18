@@ -3,20 +3,15 @@
 
 import logging
 import pandas as pd
-import json
 from fastapi import FastAPI,Request,  Form
 from pydantic import BaseModel #data validation
 from .model.modelApiEndpoint import getPredictionFromTestByIndex, getPredictionFromForm
 from .model.modelApiEndpoint import __version__ as model_version
-from pathlib import Path
 from fastapi.responses import HTMLResponse
 from fastapi import HTTPException, status, Security, FastAPI
 from fastapi.security import APIKeyHeader, APIKeyQuery
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from imp import reload 
-from fastapi.templating import Jinja2Templates
-import requests
 
 API_KEYS = [
     "9d207bf0-10f5-4d8f-a479-22ff5aeff8d1",
@@ -241,28 +236,31 @@ async def process_form(
     bathroom_ratio: int = Form(...),
     household_rooms: int = Form(...)
 ):
-    data = {
-        "net_usable_area": net_usable_area,
-        "net_area": net_area,
-        "n_rooms": n_rooms,
-        "n_bathroom": n_bathroom,
-        "latitude": latitude,
-        "longitude": longitude,
-        "price": price,
-        "la_reina": la_reina,
-        "las_condes": las_condes,
-        "lo_barnechea": lo_barnechea,
-        "nunoa": nunoa,
-        "providencia": providence,
-        "vitacura": vitacura,
-        "casa": house,
-        "departamento": department,
-        "bathroom_ratio": bathroom_ratio,
-        "household_rooms": household_rooms
-    }
-    df = pd.DataFrame([data])
-    prediction = getPredictionFromForm(df)
-    return prediction.tolist()
+    try:
+        data = {
+            "net_usable_area": net_usable_area,
+            "net_area": net_area,
+            "n_rooms": n_rooms,
+            "n_bathroom": n_bathroom,
+            "latitude": latitude,
+            "longitude": longitude,
+            "price": price,
+            "la_reina": la_reina,
+            "las_condes": las_condes,
+            "lo_barnechea": lo_barnechea,
+            "nunoa": nunoa,
+            "providencia": providence,
+            "vitacura": vitacura,
+            "casa": house,
+            "departamento": department,
+            "bathroom_ratio": bathroom_ratio,
+            "household_rooms": household_rooms
+        }
+        df = pd.DataFrame([data])
+        prediction = getPredictionFromForm(df)
+        return prediction.tolist()
+    except Exception as e:
+        return {"error": str(e)}
 
 '''
 # URL do seu servidor FastAPI
