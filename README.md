@@ -1,4 +1,4 @@
-## Predicting Households Price in Chile with Docker
+## Predicting Households Price in Chile with Docker and FastAPI
 
 ## Improvement Points
 
