@@ -1,4 +1,4 @@
-```markdown
+
 # Machine Learning Projects
 
 This repository hosts a collection of machine learning projects covering various domains and applications. Each project showcases the application of machine learning algorithms and techniques to solve real-world problems.
@@ -17,4 +17,4 @@ Dive into predictive modeling projects focused on forecasting household prices i
 
 Feel free to explore, contribute, or fork these projects to learn more about machine learning and its applications.
 
-```
+
